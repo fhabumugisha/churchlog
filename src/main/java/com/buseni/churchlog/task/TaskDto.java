@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.convert.DurationUnit;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,7 +17,7 @@ import java.util.UUID;
 @Builder
 public class TaskDto {
 
-    private UUID id;
+    private Integer id;
     private String title;
 
     private String description;
@@ -26,7 +28,8 @@ public class TaskDto {
 
     private String persons;
 
-    private Duration duration;
+    @DurationUnit(value = ChronoUnit.MINUTES)
+    private Long duration;
 
     private Date taskDate;
 

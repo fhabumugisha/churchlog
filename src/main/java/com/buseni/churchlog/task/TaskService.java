@@ -9,7 +9,55 @@ public interface TaskService {
      * Get all tasks
      * @return
      */
-    List<TaskDto> getTasks();
+    List<TaskDto> getTasks(String type);
 
-    TaskDto getTaskById(UUID id) ;
+    /**
+     * Read task by id
+     * @param id
+     * @return task
+     */
+    TaskDto getTaskById(Integer id) ;
+
+    /**
+     * Read task by type
+     * @param type
+     * @return  list of given type
+     */
+    List<TaskDto> getTaskByType(String type) ;
+
+    /**
+     * Read task by service
+     * @param service
+     * @return list of given service
+     */
+    List<TaskDto> getTaskByService(String service) ;
+
+    /**
+     * Read task by username
+     * @param username
+     * @return list of given username
+     */
+    List<TaskDto> getTaskByUsername(String username) ;
+
+    /**
+     * Delete task by id
+     * @param id
+     * @return
+     */
+    void deleteTaskById(Integer id) ;
+
+    /**
+     * Updates the given task
+     * @param task
+     * @return
+     */
+    TaskDto  updateTask(TaskDto task);
+
+
+    /**
+     * Create the given task
+     * @param task
+     * @return id of the created task
+     */
+    Integer  createTask(TaskDto task);
 }

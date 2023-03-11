@@ -1,30 +1,78 @@
 package com.buseni.churchlog.task;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.random.RandomGenerator;
 
 @Service
 public class TaskServiceImpl implements  TaskService{;
 
-   private static List<TaskDto> tasks =  new ArrayList<TaskDto>();
+    private  TaskRepo taskRepo;
 
-   static {
-       tasks.add(TaskDto.builder().id(UUID.randomUUID()).taskDate(new Date()).type("Réunion").service("Bureau").description("Préparation réunion 11.03").duration(Duration.ofHours(2)).userName("Fab").build());
-       tasks.add(TaskDto.builder().id(UUID.randomUUID()).taskDate(new Date()).type("Envoie mail").persons("Pascal").description("Propositiion 24.03").userName("Fab").build());
-   }
+    private  TaskMapper mapper;
 
-    @Override
-    public List<TaskDto> getTasks() {
-        return tasks;
+    @Autowired
+    public TaskServiceImpl(TaskRepo taskRepo, TaskMapper mapper){
+        this.taskRepo = taskRepo;
+        this.mapper = mapper;
     }
 
     @Override
-    public TaskDto getTaskById(UUID id)  {
-        return tasks.stream().filter(taskDto -> taskDto.getId().equals(id)).findFirst().orElseThrow();
+    public List<TaskDto> getTasks(String type)
+    {
+        if (null != type) {
+            return getTaskByType(type);
+        }
+        return mapper.map(taskRepo.findAll());
+    }
+
+    @Override
+    public TaskDto getTaskById(Integer id)  {
+        Task task = taskRepo.findById(id).orElseThrow(() -> new TaskNotFoundException("Task with id  [%s] not found".formatted(id)));
+        return mapper.entityToDto(task);
+    }
+
+    @Override
+    public List<TaskDto> getTaskByType(String type) {
+        return mapper.map(taskRepo.findByType(type));
+    }
+
+    @Override
+    public List<TaskDto> getTaskByService(String service) {
+        return mapper.map(taskRepo.findByService(service));
+    }
+
+    @Override
+    public List<TaskDto> getTaskByUsername(String username) {
+        return mapper.map(taskRepo.findByUserName(username));
+    }
+
+    @Override
+    public void deleteTaskById(Integer id) {
+           taskRepo.deleteById(id);
+    }
+
+    @Override
+    public TaskDto updateTask(TaskDto task) {
+       if(null != task && taskRepo.existsById(task.getId())){
+            Task toUpdate = taskRepo.findById(task.getId()).get();
+            toUpdate.setDescription(task.getDescription());
+            toUpdate.setService(task.getService());
+            toUpdate.setTaskDate(task.getTaskDate());
+            toUpdate.setDuration(Duration.ofMinutes(task.getDuration()));
+            toUpdate.setPersons(task.getPersons());
+            taskRepo.save(toUpdate);
+            task = mapper.entityToDto(toUpdate);
+       }
+        return task;
+    }
+
+    @Override
+    public Integer createTask(TaskDto task) {
+        Task taskCreated = taskRepo.save(mapper.dtoToEntity(task));
+        return taskCreated.getId();
     }
 }
