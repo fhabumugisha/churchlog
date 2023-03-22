@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class DbInitializer implements CommandLineRunner {
 
-
 	private final TaskRepo taskRepo;
 	
 	public DbInitializer(TaskRepo taskRepo) {
