@@ -1,0 +1,25 @@
+{
+  "AWSEBDockerrunVersion": 2,
+
+  "containerDefinitions": [
+    {
+      "name": "churchlog-api",
+      "image": "buseni/churchlog-api:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-egjdwtrhry-stack-awsebrdsdatabase-d47w1hwdqknu.c6ol8pvthtf0.eu-west-3.rds.amazonaws.com:5432/buseni"
+        }
+      ]
+    }
+  ]
+}
