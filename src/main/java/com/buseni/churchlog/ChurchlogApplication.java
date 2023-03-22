@@ -14,6 +14,4 @@ public class ChurchlogApplication {
 		SpringApplication.run(ChurchlogApplication.class, args);
 	}
 
-
-
 }
