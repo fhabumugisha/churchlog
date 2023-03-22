@@ -13,6 +13,20 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
+  churchlog-api:
+    container_name: churchlog-api
+    image: buseni/churchlog-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/buseni
+    ports:
+      - "8088:8080"
+    networks:
+      - postgres
+    depends_on:
+      - db
+    restart: unless-stopped
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4

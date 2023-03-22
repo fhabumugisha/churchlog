@@ -1,4 +1,4 @@
-package com.buseni.churchlog.task;
+package com.buseni.churchlog.task.converters;
 
 
 import jakarta.persistence.AttributeConverter;

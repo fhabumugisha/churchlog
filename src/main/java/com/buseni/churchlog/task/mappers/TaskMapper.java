@@ -1,7 +1,8 @@
-package com.buseni.churchlog.task;
+package com.buseni.churchlog.task.mappers;
 
+import com.buseni.churchlog.task.TaskDto;
+import com.buseni.churchlog.task.entities.Task;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.time.Duration;
 import java.util.List;

@@ -1,5 +1,7 @@
 package com.buseni.churchlog.task;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +19,14 @@ public interface TaskService {
      * @return task
      */
     TaskDto getTaskById(Integer id) ;
+
+    /**
+     * Read task by id
+     * @param type the type of the task
+     * @param  date the date of the task
+     * @return task
+     */
+    List<TaskDto> getTasksByTypeAndDate(String type, LocalDate date ) ;
 
     /**
      * Read task by type

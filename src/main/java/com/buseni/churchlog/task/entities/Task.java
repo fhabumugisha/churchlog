@@ -1,9 +1,10 @@
-package com.buseni.churchlog.task;
+package com.buseni.churchlog.task.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,8 +17,8 @@ import java.util.Date;
 public class Task {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "task_id_sequence")
-    @SequenceGenerator(name = "task_id_sequence", sequenceName = "task_id_sequence")
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
+    @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq", allocationSize = 1)
     private Integer id;
 
     private String title;
@@ -34,9 +35,11 @@ public class Task {
 
     private Duration duration;
 
-    @Column(nullable = false)
-    private Date taskDate;
+    @Column(nullable = false, name = "task_date")
+    @Temporal(TemporalType.DATE)
+    private LocalDate taskDate;
 
+    @Column(nullable = false, name = "user_name")
     private String userName;
 
 

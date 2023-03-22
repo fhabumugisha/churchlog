@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,6 +29,12 @@ public class TaskController {
     @GetMapping(value = "/{id}")
     public TaskDto getTaskById(@PathVariable(value = "id") Integer id){
         return  this.taskService.getTaskById(id);
+
+    }
+
+    @GetMapping(value = "/filter")
+    public List<TaskDto> getTaskByTypeAndMonth(@RequestParam String type, @RequestParam LocalDate date){
+        return  this.taskService.getTasksByTypeAndDate(type, date);
 
     }
 

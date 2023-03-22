@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.convert.DurationUnit;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class TaskDto {
     @DurationUnit(value = ChronoUnit.MINUTES)
     private Long duration;
 
-    private Date taskDate;
+    private LocalDate taskDate;
 
     private String userName;
 }
