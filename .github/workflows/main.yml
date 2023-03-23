@@ -5,10 +5,23 @@ on:
     - main
   
 jobs:
- my_job:
-    name: deploy to staging
+ build:
+    name: build backend
     runs-on: ubuntu-18.04
-    
+    services:
+      postgres:
+        image: postgres:15.2
+        env:
+          POSTGRES_USER: buseni
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: buseni
+        ports:
+          - 5332:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - name: Checkout
       uses: actions/checkout@v3.4.0
@@ -16,8 +29,9 @@ jobs:
     - name: Setup Java JDK
       uses: actions/setup-java@v3.10.0
       with:
-       # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
        java-version: 17
        cache: maven
        distribution: temurin
+    - name: Build and run Unit/Integration Tests with Maven
+      run: mvn -ntp -B verify
    
