@@ -34,9 +34,9 @@ jobs:
     - name: Setup Java JDK
       uses: actions/setup-java@v3.10.0
       with:
-       java-version: 17
-       cache: maven
-       distribution: temurin
+       java-version: '17'
+       cache: 'maven'
+       distribution: 'temurin'
     - name: Build and run Unit/Integration Tests with Maven
       run: mvn -ntp -B package
 
