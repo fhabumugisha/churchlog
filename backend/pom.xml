@@ -224,7 +224,7 @@
 				<version>3.3.1</version>
 				<configuration>
 					<from>
-						<image>eclipse-temur$in:17</image>
+						<image>eclipse-temurin:17</image>
 						<!--<platforms>
 							<platform>
 								<architecture>amd64</architecture>
