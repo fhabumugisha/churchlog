@@ -1,11 +1,12 @@
 name: CD - Deploy Backend
+
 on:
-   workflow_dispatch:
-   push:
-    branches:
-      - main
-    paths:
-      - backend/**
+  workflow_dispatch:
+  push:
+   branches:
+    - main
+   paths:
+    - backend/**
   
 jobs:
  deploy:
@@ -36,8 +37,8 @@ jobs:
           curl -X POST -H 'Content-type: application/json'
           --data '{"text":":github: https://https://github.com/fhabumugisha/churchlog/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}"}' 
           ${{ vars.SLACK_WEBHOOK_URL }}
-          - name: Send Slack Message
-            run: >
+    - name: Send Slack Message
+      run: >
               curl -X POST -H 'Content-type: application/json'
               --data '{"text":"Deployment started :progress_bar: :fingerscrossed:"}' 
               ${{ vars.SLACK_WEBHOOK_URL }}
