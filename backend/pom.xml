@@ -225,11 +225,7 @@
 				<configuration>
 					<from>
 						<image>eclipse-temurin:17</image>
-						<!--<platforms>
-							<platform>
-								<architecture>amd64</architecture>
-								<os>windows</os>
-							</platform>
+						<platforms>
 							<platform>
 								<architecture>amd64</architecture>
 								<os>linux</os>
@@ -239,7 +235,7 @@
 								<os>linux</os>
 							</platform>
 						</platforms>
-						-->
+
 					</from>
 					<to>
 						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
