@@ -4,7 +4,7 @@
   "containerDefinitions": [
     {
       "name": "churchlog-api",
-      "image": "buseni/churchlog-api:28.03.2023.12.31.00",
+      "image": "buseni/churchlog-api:05.04.2023.11.51.31",
       "essential": true,
       "memory": 512,
       "portMappings": [
