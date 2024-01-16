@@ -27,6 +27,20 @@ services:
       - db
     restart: unless-stopped
 
+  churchlog-angular:
+    container_name: churchlog-angular
+    image: buseni/churchlog-angular
+    build:
+      context: frontend/angular
+      args:
+        API_URL: http://localhost:8088
+    ports:
+      - "3000:4200"
+
+    depends_on:
+      - churchlog-api
+    restart: unless-stopped
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
