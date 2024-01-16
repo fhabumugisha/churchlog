@@ -3,13 +3,26 @@
 
   "containerDefinitions": [
     {
+      "name": "churchlog-angular",
+      "image": "buseni/churchlog-angular:latest",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 4200
+        }
+      ]
+
+    },
+    {
       "name": "churchlog-api",
-      "image": "buseni/churchlog-api:05.04.2023.12.03.05",
+      "image": "buseni/churchlog-api:latest",
       "essential": true,
       "memory": 512,
       "portMappings": [
         {
-          "hostPort": 80,
+          "hostPort": 8080,
           "containerPort": 8080
         }
       ],
@@ -17,7 +30,7 @@
       "environment": [
         {
           "name": "SPRING_DATASOURCE_URL",
-          "value": "jdbc:postgresql://awseb-e-sketjhcqgf-stack-awsebrdsdatabase-uefil0eh1iwc.c6ol8pvthtf0.eu-west-3.rds.amazonaws.com:5432/buseni"
+          "value": "jdbc:postgresql://awseb-e-xgfdrymsaw-stack-awsebrdsdatabase-oehoxjokjtc0.c6ol8pvthtf0.eu-west-3.rds.amazonaws.com:5432/buseni"
         }
       ]
     }
